@@ -60,6 +60,18 @@ namespace airlib
         (static_cast<rpc::server*>(getServer()))->bind("moveByMotorPWMs", [&](float front_right_pwm, float rear_left_pwm, float front_left_pwm, float rear_right_pwm, float duration, const std::string& vehicle_name) -> bool {
             return getVehicleApi(vehicle_name)->moveByMotorPWMs(front_right_pwm, rear_left_pwm, front_left_pwm, rear_right_pwm, duration);
         });
+
+        (static_cast<rpc::server*>(getServer()))->bind("moveByPWMBatch", [&](std::vector<float>& front_right_pwm, std::vector<float>& rear_left_pwm, std::vector<float>& front_left_pwm, std::vector<float>& rear_right_pwm, float duration,
+                                                                        const std::vector<std::string>& vehicle_names) -> bool {
+            auto waiterFunction = [&, front_right_pwm, rear_left_pwm, front_left_pwm, rear_right_pwm, duration, vehicle_names]() {
+                for (unsigned int i = 0; i < vehicle_names.size(); i++) {
+                    getVehicleApi(vehicle_names[i])->moveByMotorPWMsNonLock(front_right_pwm[i], rear_left_pwm[i], front_left_pwm[i], rear_right_pwm[i], duration);
+                }
+                return false;
+            };
+            return getVehicleApi(vehicle_names[0])->waitForFunction(waiterFunction, duration).isComplete();
+        });
+
         (static_cast<rpc::server*>(getServer()))->bind("moveByRollPitchYawZ", [&](float roll, float pitch, float yaw, float z, float duration, const std::string& vehicle_name) -> bool {
             return getVehicleApi(vehicle_name)->moveByRollPitchYawZ(roll, pitch, yaw, z, duration);
         });

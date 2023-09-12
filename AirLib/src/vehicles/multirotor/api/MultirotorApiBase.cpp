@@ -144,6 +144,17 @@ namespace airlib
             .isTimeout();
     }
 
+
+    bool MultirotorApiBase::moveByMotorPWMsNonLock(float front_right_pwm, float rear_left_pwm, float front_left_pwm, float rear_right_pwm, float duration)
+    {
+        if (duration <= 0)
+            return false;
+
+        commandMotorPWMs(front_right_pwm, rear_left_pwm, front_left_pwm, rear_right_pwm);
+        return false;
+    }
+
+
     bool MultirotorApiBase::moveByRollPitchYawZ(float roll, float pitch, float yaw, float z, float duration)
     {
         SingleTaskCall lock(this);
