@@ -63,6 +63,4 @@ RUN mkdir ~/Downloads/Marco_Polo_Drone
 ADD Marco_Polo_Drone/* ~/Downloads/Marco_Polo_Drone
 RUN ~/Downloads/Marco_Polo_Drone/setup_MP.sh
 
-
-
-ENTRYPOINT ls
+ENTRYPOINT "cd Marco_Polo_Drone && bash run_MP.sh output5 drone.yaml"
