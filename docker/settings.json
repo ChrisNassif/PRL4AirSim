@@ -1,19 +1,82 @@
 {
-  "SeeDocsAt": "https://github.com/Microsoft/AirSim/blob/master/docs/settings_json.md",
-  "SettingsVersion": 1.2,
+  "SeeDocsAt": "https://github.com/Microsoft/AirSim/blob/main/docs/settings.md",
   "SimMode": "Multirotor",
-  "ClockSpeed": 1.0,
-  "Vehicles": {
-    "SimpleFlight": {
-      "VehicleType": "SimpleFlight",
-      "DefaultVehicleState": "Armed",
-      "EnableCollisionPassthrogh": false,
-      "EnableCollisions": true,
-      "AllowAPIAlways": true,
-      "RC": {
-        "RemoteControlID": 0,
-        "AllowAPIWhenDisconnected": false
+  "SettingsVersion": 1.2,
+  "ClockSpeed": 1.001,
+  "ApiServerPort": 41451,
+  "GymEnvServerPort": 9090,
+  "ViewMode": "NoDisplay",
+  "CameraDefaults": {
+    "CaptureSettings": [
+      {
+        "ImageType": 0,
+        "Width": 256,
+        "Height": 144,
+        "FOV_Degrees": 90,
+        "AutoExposureSpeed": 100,
+        "AutoExposureBias": 0,
+        "AutoExposureMaxBrightness": 0.64,
+        "AutoExposureMinBrightness": 0.03,
+        "MotionBlurAmount": 0,
+        "TargetGamma": 1.0,
+        "ProjectionMode": "",
+        "OrthoWidth": 5.12
       }
+    ],
+    "NoiseSettings": [
+      {
+        "Enabled": false,
+        "ImageType": 0,
+        "RandContrib": 0.2,
+        "RandSpeed": 100000.0,
+        "RandSize": 500.0,
+        "RandDensity": 2,
+        "HorzWaveContrib": 0.03,
+        "HorzWaveStrength": 0.08,
+        "HorzWaveVertSize": 1.0,
+        "HorzWaveScreenSize": 1.0,
+        "HorzNoiseLinesContrib": 1.0,
+        "HorzNoiseLinesDensityY": 0.01,
+        "HorzNoiseLinesDensityXY": 0.5,
+        "HorzDistortionContrib": 1.0,
+        "HorzDistortionStrength": 0.002
+      }
+    ],
+    "Gimbal": {
+      "Stabilization": 0,
+      "Pitch": 0,
+      "Roll": 0,
+      "Yaw": 0
+    },
+    "X": 100,
+    "Y": 100,
+    "Z": 100,
+    "Pitch": 0,
+    "Roll": 0,
+    "Yaw": 0,
+    "UnrealEngine": {
+      "PixelFormatOverride": [
+        {
+          "ImageType": 0,
+          "PixelFormat": 0
+        }
+      ]
     }
-  }
+  },
+  "Vehicles": {
+    "0": {
+      "VehicleType": "SimpleFlight",
+      "X": 0,
+      "Y": 0,
+      "Z": -1
+    }
+  },
+  "SubWindows": [
+    {
+      "WindowID": 1,
+      "ImageType": 3,
+      "CameraName": "1",
+      "Visible": true
+    }
+  ]
 }
