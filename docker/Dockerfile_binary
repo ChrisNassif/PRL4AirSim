@@ -1,10 +1,14 @@
 ARG BASE_IMAGE=nvidia/cudagl:10.0-devel-ubuntu18.04
 FROM $BASE_IMAGE
 
+# Don't know why I need this but it makes it work because of nvidia drivers or smthn 
+# https://forums.developer.nvidia.com/t/invalid-public-key-for-cuda-apt-repository/212901/11
+RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub 285
+
+
 # basic dependencies
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y --no-install-recommends \
-	sudo \
-	libglu1-mesa-dev \
+RUN apt-get update && apt-get install -y --no-install-recommends sudo
+RUN libglu1-mesa-dev \
 	xdg-user-dirs \
 	pulseaudio \
 	x11-xserver-utils
@@ -16,7 +20,6 @@ RUN sudo apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y
-
 
 
 # install the dependencies that allow us to install our specific version of python
@@ -48,6 +51,7 @@ RUN adduser --force-badname --disabled-password --gecos '' --shell /bin/bash air
 	adduser airsim_user sudo && \
 	adduser airsim_user audio && \
 	adduser airsim_user video
+
 
 USER airsim_user
 WORKDIR /home/airsim_user
